@@ -34,3 +34,15 @@ Support desk. Decision records: whoever signed them.
 ---
 
 Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
+
+## Building
+
+The export ships `src/` only. `package.json`, `svelte.config.js` and `vite.config.js` add the
+smallest SvelteKit + mdsvex frame that renders it: `npm install`, then `npm run build`. Every page is
+prerendered into `rendered/`, committed so the pages can be read as the desk sees them.
+
+## Added
+
+- `src/routes/kb/incidents/4471/problems/+page.svx` · what the reports merged into #4471 show, one
+  ticket per problem. Signed. Built from `src/lib/kb/problems.ts` and its components.
+- `rendered/kb/incidents/4471/problems/index.html` and `rendered/problems.png` · that page, rendered.
