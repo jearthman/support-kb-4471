@@ -1,29 +1,29 @@
 <script lang="ts">
   import { problemsOf, type Problem } from '#lib/kb/problems';
 
-  // Every report in one problem, in the reporter's words. Meant for the small groups.
+  // Every report of one problem, as it was written. For the small groups.
   let { ticket, problem }: { ticket: number; problem: Problem } = $props();
 
-  const rows = $derived(
-    (problemsOf(ticket).find((g) => g.problem === problem)?.reports ?? []).toSorted((a, b) => a.id.localeCompare(b.id)),
-  );
+  const rs = $derived(problemsOf(ticket).find((g) => g.problem === problem)?.reports ?? []);
 </script>
 
 <table>
-  <thead><tr><th>report</th><th>received</th><th>tenant</th><th>channel</th><th>what they wrote</th></tr></thead>
+  <thead>
+    <tr><th>report</th><th>received</th><th>tenant</th><th>channel</th><th>what they wrote</th></tr>
+  </thead>
   <tbody>
-    {#each rows as r (r.id)}
+    {#each rs as r (r.id)}
       <tr>
         <td><code>{r.id}</code></td>
         <td>{r.receivedAt.slice(0, 10)}</td>
         <td>{r.tenant}</td>
         <td>{r.channel}</td>
-        <td class="body">{r.body}</td>
+        <td>{r.body}</td>
       </tr>
     {/each}
   </tbody>
 </table>
 
 <style>
-  .body { font-size: 0.9em; }
+  td:nth-child(-n + 2) { white-space: nowrap; }
 </style>

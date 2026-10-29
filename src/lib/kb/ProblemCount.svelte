@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { problemsOf, type Problem } from '#lib/kb/problems';
+  import { mergedInto, problemsOf, type Problem } from '#lib/kb/problems';
 
-  // A count inside a sentence, computed like the table: <ProblemCount ticket={4471} problem="hint" />
-  let { ticket, problem }: { ticket: number; problem: Problem } = $props();
+  // A number inside a sentence: the reports merged into a ticket, or one problem's; `of="tenants"`
+  // counts the tenants they came from instead.
+  let { ticket, problem, of = 'reports' }: { ticket: number; problem?: Problem; of?: 'reports' | 'tenants' } = $props();
 
-  const n = $derived(problemsOf(ticket).find((g) => g.problem === problem)?.reports.length ?? 0);
+  const rs = $derived(problem ? (problemsOf(ticket).find((g) => g.problem === problem)?.reports ?? []) : mergedInto(ticket));
+  const n = $derived(of === 'tenants' ? new Set(rs.map((r) => r.tenant)).size : rs.length);
 </script>
 
-<strong>{n}</strong>
+<b>{n}</b>
