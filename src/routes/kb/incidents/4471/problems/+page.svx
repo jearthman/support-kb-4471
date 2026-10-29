@@ -4,7 +4,7 @@ title: '#4471 · one ticket per problem'
 owner: James Earthman
 status: open
 reviewed: 2026-10-28
-signature: James Earthman
+signature: v1.eyJzdWIiOiI5MTE1IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMzcxMzgsImV4cCI6MTc5MzMyMzUzOH0.c_7dkPSjW4DoqVwRPH3L-vCA_-7upKbtFumKs1C6oR4
 ---
 
 <script>
